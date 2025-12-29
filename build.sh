@@ -11,6 +11,6 @@ sudo mount --rbind /sys ./alp/root/sys/
 cp /etc/resolv.conf -t ${GITHUB_WORKSPACE}/alp/root/etc/
 cd ${GITHUB_WORKSPACE}
 echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> ./alp/root/etc/apk/repositories
-sudo chroot ./alp/root/ /bin/sh -c "apk update && apk upgrade && apk add git build-base sdl3 sdl3_ttf sdl3_image make cmake libarchive harfbuzz spdlog fmt libxml2 inih && git clone https://github.com/complexlogic/big-launcher.git && cd big-launcher && mkdir build && cd build && cmake .. && make && mkdir /app && make DESTDIR=/app install && exit"
+sudo chroot ./alp/root/ /bin/sh -c "apk update && apk upgrade && apk add pkgconfig git build-base sdl3 sdl3_ttf sdl3_image make cmake libarchive harfbuzz spdlog fmt libxml2 inih && git clone https://github.com/complexlogic/big-launcher.git && cd big-launcher && mkdir build && cd build && cmake .. && make && mkdir /app && make DESTDIR=/app install && exit"
 cp ${GITHUB_WORKSPACE}/icon.png ./alp/ && cp ${GITHUB_WORKSPACE}/Big-Launcher.desktop ./alp/ && cp ${GITHUB_WORKSPACE}/AppRun ./alp/
 ARCH=x86_64 VERSION=clean ./appimagetool -n ./alp/
