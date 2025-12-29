@@ -1,0 +1,6 @@
+#!/bin/bash
+
+SELF=$(readlink -f "$0")
+HERE=${SELF%/*}
+
+"$HERE/proot" -R "$HERE/root" -b /usr/share/icons:/usr/share/icons -b /usr/share/fonts:/usr/share/fonts /usr/bin/gimp-2.10 "$@" | cat
