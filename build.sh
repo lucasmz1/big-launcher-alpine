@@ -11,6 +11,8 @@ sudo mount --rbind /sys ./alp/root/sys/
 cp /etc/resolv.conf -t ${GITHUB_WORKSPACE}/alp/root/etc/
 cd ${GITHUB_WORKSPACE}
 echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> ./alp/root/etc/apk/repositories
-sudo chroot ./alp/root/ /bin/sh -c "apk update && apk upgrade && apk add pkgconfig git build-base sdl3-dev sdl3_ttf-dev sdl3_image-dev make cmake libarchive harfbuzz fmt fmt-dev libxml2 libxml2-dev inih spdlog-dev spdlog && git clone https://github.com/complexlogic/big-launcher.git && cd big-launcher && mkdir build && cd build && mkdir /app && cmake .. -DCMAKE_INSTALL_PREFIX=/app && make && exit"
-cp ${GITHUB_WORKSPACE}/icon.png ./alp/ && cp ${GITHUB_WORKSPACE}/Big-Launcher.desktop ./alp/ && cp ${GITHUB_WORKSPACE}/AppRun ./alp/
-ARCH=x86_64 VERSION=clean ./appimagetool -n ./alp/
+sudo chroot ./alp/root/ /bin/sh -c "apk update && apk upgrade && apk add pkgconfig git build-base sdl3-dev sdl3_ttf-dev sdl3_image-dev make cmake libarchive harfbuzz fmt fmt-dev libxml2 libxml2-dev inih spdlog-dev spdlog && git clone https://github.com/complexlogic/big-launcher.git && cd big-launcher && mkdir build && cd build && cmake .. && make LD_FLAGS='static' && exit"
+#cp ${GITHUB_WORKSPACE}/icon.png ./alp/ && cp ${GITHUB_WORKSPACE}/Big-Launcher.desktop ./alp/ && cp ${GITHUB_WORKSPACE}/AppRun ./alp/
+#ARCH=x86_64 VERSION=clean ./appimagetool -n ./alp/
+mkdir dist
+find ./alp/root -type f -executable -iname "*big-launcher*" | xargs -i -t -exec cp {} ./dist/ \;
