@@ -15,4 +15,4 @@ sudo chroot ./alp/root/ /bin/sh -c "apk update && apk upgrade && apk add pkgconf
 #cp ${GITHUB_WORKSPACE}/icon.png ./alp/ && cp ${GITHUB_WORKSPACE}/Big-Launcher.desktop ./alp/ && cp ${GITHUB_WORKSPACE}/AppRun ./alp/
 #ARCH=x86_64 VERSION=clean ./appimagetool -n ./alp/
 mkdir dist
-find ./alp/root -type f -executable -iname "*big-launcher*" | xargs -i -t -exec cp {} ./dist/ \;
+sudo find ./alp/root -type f -executable -iname "*big-launcher*" | xargs -i -t -exec sudo cp {} ./dist/ \;
