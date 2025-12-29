@@ -11,6 +11,6 @@ echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> ./alp/root/etc/apk/r
 sudo chroot ./alp/root/ /bin/ash -l -c "apk update && apk upgrade && apk add sdl3 sdl3_ttf sdl3_image make cmake libarchive harfbuzz spdlog fmt libxml2 inih"
 sudo git clone https://github.com/complexlogic/big-launcher.git /alp/root/big-launcher
 cd /alp/root/big-launcher
-cmake -B ..
-make
+sudo cmake -B ..
+sudo make
 ARCH=x86_64 VERSION=clean ./appimagetool -n ./alp/
