@@ -5,14 +5,17 @@ wget -q "https://dl-cdn.alpinelinux.org/alpine/edge/releases/x86_64/alpine-minir
 mkdir alp
 mkdir -p ./alp/root/
 tar xf alpine.tar.gz -C ./alp/root/
-sudo mount -t proc none ./alp/root/proc/
-sudo mount --rbind /dev ./alp/root/dev/
-sudo mount --rbind /sys ./alp/root/sys/
+sudo mount --bind /proc ./alp/root/proc/
+sudo mount --bind /dev ./alp/root/dev/
+sudo mount --bind /sys ./alp/root/sys/
 cp /etc/resolv.conf -t ${GITHUB_WORKSPACE}/alp/root/etc/
 cd ${GITHUB_WORKSPACE}
 echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> ./alp/root/etc/apk/repositories
 sudo chroot ./alp/root/ /bin/sh -c "apk update && apk upgrade && apk add pkgconfig git build-base sdl3-dev sdl3_ttf-dev sdl3_image-dev make cmake libarchive harfbuzz fmt fmt-dev libxml2 libxml2-dev inih spdlog-dev spdlog && git clone https://github.com/complexlogic/big-launcher.git && cd big-launcher && mkdir build && cd build && cmake .. && make && exit"
 cp ${GITHUB_WORKSPACE}/icon.png ./alp/ && cp ${GITHUB_WORKSPACE}/Big-Launcher.desktop ./alp/ && cp ${GITHUB_WORKSPACE}/AppRun ./alp/
+sudo umount -lf ./alp/root/proc
+sudo umount -lf ./alp/root/sys
+sudo umount -lf ./alp/root/dev
 ARCH=x86_64 VERSION=clean ./appimagetool -n ./alp/
 cd ${GITHUB_WORKSPACE}
 mkdir dist
