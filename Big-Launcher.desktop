@@ -1,10 +1,7 @@
 [Desktop Entry]
-Comment=app
 Exec=big-launcher
-GenericName=app
 Icon=icon
-MimeType=
-Name[pt_BR]=Big-Launcher
+Name=Big-Launcher
 StartupNotify=true
 Terminal=false
 Categories=System;
